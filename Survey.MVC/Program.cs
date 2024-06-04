@@ -1,13 +1,14 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using WebApp1.Data;
+using Survey.MVC.Areas.Identity.Data;
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("ApplicationDbContextConnection") ?? throw new InvalidOperationException("Connection string 'ApplicationDbContextConnection' not found.");
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'IdentityDataContextConnection' not found.");
 
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connectionString));
+builder.Services.AddDbContext<IdentityDataContext>(options => options.UseSqlite(connectionString));
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<IdentityDataContext>();
 
+builder.Services.AddRazorPages();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -31,5 +32,5 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
+app.MapRazorPages();
 app.Run();
