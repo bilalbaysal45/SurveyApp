@@ -20,3 +20,47 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.fill{
+  grid-column: 1;
+    /* occupy the entire column */
+    grid-row: 1;
+    /* occupy the entire row */
+}
+.my-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.empty-nav {
+  grid-area: 1 / 2 / 2 / 6;
+}
+
+.profile {
+  border: 1px solid white;
+  grid-area: 1 / 1 / 2 / 2;
+}
+
+.menu {
+  border: 1px solid white;
+
+  grid-area: 2 / 1 / 4 / 2;
+}
+
+.menu a{
+  text-decoration: none;
+  margin: 10px;
+  border: 1px solid white;
+  font-size: 50px;
+  color: white;
+}
+.menu a:hover{
+  opacity: .9;
+}
+
+.content {
+  grid-area: 2 / 2 / 4 / 6;
+}
