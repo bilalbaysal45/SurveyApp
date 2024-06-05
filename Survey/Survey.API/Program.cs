@@ -1,7 +1,11 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Survey.Business.Abstract;
+using Survey.Business.Concrete;
+using Survey.Data.Abstract;
 using Survey.Data.Concrete.EfCore.Contexts;
+using Survey.Data.Concrete.EfCore.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 // builder.Services.AddAuthorization();
@@ -16,6 +20,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<SurveyDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddScoped<ISurveyRepository, EfCoreSurveyRepository>();
+builder.Services.AddScoped<ISurveyService, SurveyManager>();
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 
