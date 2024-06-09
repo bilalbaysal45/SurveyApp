@@ -6,6 +6,7 @@ using Survey.Business.Concrete;
 using Survey.Data.Abstract;
 using Survey.Data.Concrete.EfCore.Contexts;
 using Survey.Data.Concrete.EfCore.Repository;
+using Survey.Entity.Concrete;
 
 var builder = WebApplication.CreateBuilder(args);
 // builder.Services.AddAuthorization();
@@ -22,6 +23,8 @@ builder.Services.AddDbContext<SurveyDbContext>(options =>
 
 builder.Services.AddScoped<ISurveyRepository, EfCoreSurveyRepository>();
 builder.Services.AddScoped<ISurveyService, SurveyManager>();
+builder.Services.AddScoped<IQuestionRepository, EfCoreQuestionRepository>();
+builder.Services.AddScoped<IQuestionService, QuestionManager>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

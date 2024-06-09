@@ -5,45 +5,44 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Survey.Business.Abstract;
-using Survey.Shared.Dtos.SurveyDtos;
+using Survey.Shared.Dtos.QuestionDtos;
 
 namespace Survey.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class SurveyController : ControllerBase
+    public class QuestionController : ControllerBase
     {
-        private readonly ISurveyService _surveyManager;
+        private readonly IQuestionService _questionManager;
 
-        public SurveyController(ISurveyService surveyManager)
-        {
-            _surveyManager = surveyManager;
+        public QuestionController(IQuestionService questionManager){
+            _questionManager = questionManager;
         }
-        [HttpGet("/getSurveys")]
+        [HttpGet("/getQuestions")]
         public IActionResult GetAll()
         {
-            var response = _surveyManager.GetAll();
+            var response = _questionManager.GetAll();
             var jsonResponse = JsonSerializer.Serialize(response);
             return Ok(jsonResponse);
         }
-        [HttpGet("/getSurvey/{id}")]
+        [HttpGet("/getQuestion/{id}")]
         public IActionResult GetById(int id)
         {
-            var response = _surveyManager.GetById(id);
+            var response = _questionManager.GetById(id);
             var jsonResponse = JsonSerializer.Serialize(response);
             return Ok(jsonResponse);
         }
-        [HttpPost("/addSurvey")]
-        public IActionResult Create(AddSurveyDto addNote)
+        [HttpPost("/addQuestion")]
+        public IActionResult Create(AddQuestionDto addNote)
         {
-            var response = _surveyManager.Create(addNote);
+            var response = _questionManager.Create(addNote);
             var jsonResponse = JsonSerializer.Serialize(response);
             return Ok(jsonResponse);
         }
-        [HttpPut("/updateSurvey")]
-        public IActionResult Update(UpdateSurveyDto updateNote)
+        [HttpPut("/updateQuestion")]
+        public IActionResult Update(UpdateQuestionDto updateNote)
         {
-            var response = _surveyManager.Update(updateNote);
+            var response = _questionManager.Update(updateNote);
             var JsonResponse = JsonSerializer.Serialize(response);
             return Ok(JsonResponse);
         }

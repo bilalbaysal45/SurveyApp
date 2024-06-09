@@ -26,6 +26,7 @@ namespace Survey.Business.Concrete
             var survey = _mapper.Map<Entity.Concrete.Survey>(newSurveyDto);
             try
             {
+                survey.CreatedDate = DateTime.Now;
                 var response = _surveyRepository.Create(survey);
                 if (response != null)
                 {
@@ -93,6 +94,7 @@ namespace Survey.Business.Concrete
 
             try
             {
+                survey.ModifiedDate = DateTime.Now;
                 var response = _surveyRepository.Update(survey);
                 if (response != null)
                 {
