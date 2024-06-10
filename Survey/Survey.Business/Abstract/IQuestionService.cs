@@ -9,9 +9,9 @@ namespace Survey.Business.Abstract
 {
     public interface IQuestionService
     {
-        ResponseDto<QuestionDto> Create(AddQuestionDto newSurveyDto);
+        ResponseDto<QuestionDto> Create(AddQuestionDto newQuestionDto);
         ResponseDto<List<QuestionDto>> GetAll();
         ResponseDto<QuestionDto> GetById(int id);
-        ResponseDto<UpdateQuestionDto> Update(UpdateQuestionDto updateSurveyDto);
+        ResponseDto<UpdateQuestionDto> Update(UpdateQuestionDto updateQuestionDto);
     }
 }

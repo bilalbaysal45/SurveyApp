@@ -16,5 +16,7 @@ namespace Survey.Data.Concrete.EfCore.Contexts
         //Tablolar
         public DbSet<Entity.Concrete.Survey> Surveys { get;set;}
         public DbSet<Question> Questions { get; set; }
+        public DbSet<Option> Options { get; set; }
+
     }
 }
