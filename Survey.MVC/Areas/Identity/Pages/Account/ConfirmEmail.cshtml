@@ -3,6 +3,8 @@
 @{
     ViewData["Title"] = "Confirm email";
 }
-
 <h1>@ViewData["Title"]</h1>
+<div>
 <partial name="_StatusMessage" model="Model.StatusMessage" />
+    <a class="btn btn-primary" asp-controller="Home" asp-action="Index">Back To LoginPage</a>
+</div>

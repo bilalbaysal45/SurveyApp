@@ -33,10 +33,12 @@ body {
   grid-template-rows: repeat(3, 1fr);
   grid-column-gap: 0px;
   grid-row-gap: 0px;
+  width: fit-content;
+  height: fit-content;
 }
 
 .empty-nav {
-  grid-area: 1 / 2 / 2 / 6;
+  grid-area: 1 / 2 / 2 / 6
 }
 
 .profile {
@@ -46,15 +48,14 @@ body {
 
 .menu {
   border: 1px solid white;
-
   grid-area: 2 / 1 / 4 / 2;
 }
 
 .menu a{
   text-decoration: none;
-  margin: 10px;
+  margin: 5px;
   border: 1px solid white;
-  font-size: 50px;
+  font-size: 15px;
   color: white;
 }
 .menu a:hover{
@@ -63,4 +64,10 @@ body {
 
 .content {
   grid-area: 2 / 2 / 4 / 6;
+}
+.deneme{
+  width: 70%;
+  margin: 0 auto;
+  height: 50%;
+  margin-top: 50px;
 }
