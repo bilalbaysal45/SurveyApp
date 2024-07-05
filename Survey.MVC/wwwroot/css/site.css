@@ -51,7 +51,7 @@ body {
   grid-area: 2 / 1 / 4 / 2;
 }
 
-.menu a{
+/* .menu a{
   text-decoration: none;
   margin: 5px;
   border: 1px solid white;
@@ -60,7 +60,7 @@ body {
 }
 .menu a:hover{
   opacity: .9;
-}
+} */
 
 .content {
   grid-area: 2 / 2 / 4 / 6;
@@ -70,4 +70,8 @@ body {
   margin: 0 auto;
   height: 50%;
   margin-top: 50px;
+}
+
+.my-btn{
+  width: 100%;
 }

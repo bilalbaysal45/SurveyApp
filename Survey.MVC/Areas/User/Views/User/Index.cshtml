@@ -1,4 +1,4 @@
-@model int
+@model IdentityUser
 @{
     ViewData["Title"] = "Index";
 }
@@ -8,16 +8,10 @@
 
 <div class="card bg-warning">
     <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-            card's
-            content.</p>
+        <p class="card-text">In top-left, there is a an icon with 3 line. You can click that icon and see the surveys that you didn't participate yet.</p>
     </div>
     <ul class="list-group list-group-flush">
-        <li class="list-group-item">@Model</li>
-        <li class="list-group-item">A second item</li>
-        <li class="list-group-item">A third item</li>
-        <li class="list-group-item">A fourth item</li>
-        <li class="list-group-item">A fifth item</li>
+        <li class="list-group-item">User: @Model.Email</li>
+        <li class="list-group-item"><a asp-area="User" asp-controller="User" asp-action="ChangePassword">Change User Information</a></li>
     </ul>
 </div>
