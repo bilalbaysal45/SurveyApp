@@ -1,0 +1,31 @@
+@model List<SurveyViewModel>
+@{
+    ViewData["Title"] = "Surveys";
+}
+<p class="card-text bg-warning">In top-left, there is a an icon with 3 line. You can click that icon and see the surveys
+    that
+    you didn't participate yet.</p>
+<div class="card-text text-center">Survey that you didnt participates are in the below</div>
+<div class="d-flex justify-content-center"><i class="fa-solid fa-arrow-down"></i></div>
+@if(Model.Count > 0)
+{
+    <div>
+        
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            @foreach(var survey in Model)
+            {
+                <li class="nav-item">
+                    <a class="nav-link active w-100 bg-success text-center border" aria-current="page" href="#">@survey.Name</a>
+                </li>
+            }
+            <li class="nav-item">
+                <a class="nav-link active w-100 bg-success text-center border" aria-current="page" href="#">Deneme</a>
+            </li>
+        </ul>
+    </div>
+}
+else{
+    
+    <div class="card-text text-center">There isn't Any Surveys</div>
+    
+}

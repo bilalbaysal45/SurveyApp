@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Survey.MVC.Areas.User.Data;
+using Survey.MVC.Models;
 
 namespace Survey.MVC.Areas.User.Controllers
 {
@@ -29,6 +31,12 @@ namespace Survey.MVC.Areas.User.Controllers
         public IActionResult ChangePassword()
         {
             return RedirectToPage("/Account/Manage/ChangePassword", new { area = "Identity" });
+        }
+        public async Task<IActionResult> Surveys()
+        {
+            var surveyDAL = new SurveyDAL(RequestUris.GetAllSurveys);
+            var surveys = await surveyDAL.GetAll();
+            return View(surveys);
         }
     }
 }
