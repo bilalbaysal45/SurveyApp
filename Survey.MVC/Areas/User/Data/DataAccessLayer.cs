@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Survey.MVC.Areas.User.Data.Abstract;
 using Survey.MVC.Models;
 
 namespace Survey.MVC.Areas.User.Data
@@ -48,9 +49,21 @@ namespace Survey.MVC.Areas.User.Data
             return new List<TEntity>();
         }
 
-        public TEntity GetById(int id)
+        public async Task<TEntity> GetById(int id)
         {
-            throw new NotImplementedException();
+            using (var httpClient = new HttpClient())
+            {
+                Root<TEntity> rootTEntity = new Root<TEntity>();
+                _requestUri = _requestUri+$"/{id}";
+                var response = await httpClient.GetAsync(_requestUri);
+                if (response.IsSuccessStatusCode)
+                {
+                    var contentResponse = await response.Content.ReadAsStringAsync();
+                    rootTEntity = JsonSerializer.Deserialize<Root<TEntity>>(contentResponse);
+                    return rootTEntity.Data;
+                }
+            }
+            return null;
         }
 
         public TEntity Update(TEntity entity)

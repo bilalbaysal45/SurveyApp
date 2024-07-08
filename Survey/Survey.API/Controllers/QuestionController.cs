@@ -46,5 +46,12 @@ namespace Survey.API.Controllers
             var JsonResponse = JsonSerializer.Serialize(response);
             return Ok(JsonResponse);
         }
+        [HttpGet("/getQuestionsBySurveyId/{id}")]
+        public IActionResult GetQuestionsBySurveyId(int id)
+        {
+            var response = _questionManager.GetQuestionsBySurveyId(id);
+            var jsonResponse = JsonSerializer.Serialize(response);
+            return Ok(jsonResponse);
+        }
     }
 }

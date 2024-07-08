@@ -8,6 +8,6 @@ namespace Survey.Data.Abstract
 {
     public interface IQuestionRepository :IGenericRepository<Question>
     {
-        
+        List<Question> GetQuestionsBySurveyId(int surveyId);
     }
 }

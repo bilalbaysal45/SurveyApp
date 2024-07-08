@@ -38,5 +38,18 @@ namespace Survey.MVC.Areas.User.Controllers
             var surveys = await surveyDAL.GetAll();
             return View(surveys);
         }
+        public async Task<IActionResult> Survey(int id)
+        {
+            //anket çekildi
+            var surveyDAL = new SurveyDAL(RequestUris.GetSurveyById);
+            var survey = await surveyDAL.GetById(id);
+
+            //Sorular çekildi şıklarda eklenecek ve sorularla gelmesini planlıyorum
+            var questionDAL = new QuestionDAL(RequestUris.GetQuestionsBySurveyId);
+            var questions = await questionDAL.GetQuestionsBySurveyId(RequestUris.GetQuestionsBySurveyId,id);
+
+            //Anket çek, o anketin sorularını ve şıklarını çek
+            return View(survey);
+        }
     }
 }

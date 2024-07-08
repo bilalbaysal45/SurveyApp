@@ -6,6 +6,7 @@ using AutoMapper;
 using Survey.Entity.Concrete;
 using Survey.Shared.Dtos.OptionDtos;
 using Survey.Shared.Dtos.QuestionDtos;
+using Survey.Shared.Dtos.QuestionOptionDtos;
 using Survey.Shared.Dtos.SurveyDtos;
 
 namespace Survey.Business.Mapping
@@ -28,6 +29,9 @@ namespace Survey.Business.Mapping
             CreateMap<Option, OptionDto>().ReverseMap();
             CreateMap<Option, AddOptionDto>().ReverseMap();
             CreateMap<Option, UpdateOptionDto>().ReverseMap();
+
+            //QuestionOption
+            CreateMap<QuestionOption, QuestionOptionDto>().ReverseMap();
         }
     }
 }

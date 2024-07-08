@@ -9,5 +9,6 @@ namespace Survey.Entity.Concrete
     public class Question : BaseEntity 
     {
         public int SurveyId { get; set; }
+        public List<QuestionOption> QuestionOptions{ get; set; }
     }
 }

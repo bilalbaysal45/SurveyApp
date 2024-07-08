@@ -108,5 +108,27 @@ namespace Survey.Business.Concrete
             }
             return new ResponseDto<UpdateQuestionDto> { Data = null, Error = "Update Fail Somehow" };
         }
+        public ResponseDto<List<QuestionDto>> GetQuestionsBySurveyId(int surveyId)
+        {
+            var questionDtos = new ResponseDto<List<QuestionDto>>();
+            var questions = new List<Question>();
+            try
+            {
+                questions = _questionRepository.GetQuestionsBySurveyId(surveyId);
+                if (questions.Count != 0)
+                {
+                    questionDtos.Data = _mapper.Map<List<QuestionDto>>(questions);
+                    questionDtos.Error = null;
+                    return questionDtos;
+                }
+            }
+            catch (System.Exception)
+            {
+
+                return new ResponseDto<List<QuestionDto>> { Data = null, Error = "System Exception" };
+            }
+
+            return new ResponseDto<List<QuestionDto>> { Data = null, Error = "Not Found" };
+        }
     }
 }
