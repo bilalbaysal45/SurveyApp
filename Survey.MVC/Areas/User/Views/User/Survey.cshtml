@@ -1,11 +1,61 @@
-@model SurveyViewModel
+@model SurveyAnswerViewModel
 @{
     ViewData["Title"] = "Survey";
 }
 <p class="card-text bg-warning">In top-left, there is a an icon with 3 line. You can click that icon and see the surveys that
     you didn't participate yet.</p>
 
+<div class="card">
+    <ul class="list-group list-group-flush">
+        @foreach(var question in Model.Questions)
+        {
+                @* <li class="list-group-item">@question.Name</li>
+                <li class="list-group-item">@question.QuestionOptions[0].Option.Name</li>
+                <li class="list-group-item">@question.QuestionOptions[1].Option.Name</li>
+                <li class="list-group-item">@question.QuestionOptions[2].Option.Name</li>
+                <li class="list-group-item">@question.QuestionOptions[3].Option.Name</li>
+                <li class="list-group-item">@question.QuestionOptions[4].Option.Name</li> *@
+            <li class="list-group-item">@question.Name</li>
+            <div class="form-check">
+                <input class="form-check-input " type="radio" name="flexRadioDefault"
+                    id="@question.QuestionOptions[0].Option.Id">
+                <label class="form-check-label list-group-item" for="@question.QuestionOptions[0].Option.Id">
+                    @question.QuestionOptions[0].Option.Name
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault"
+                    id="@question.QuestionOptions[1].Option.Id" checked>
+                <label class="form-check-label list-group-item" for="@question.QuestionOptions[1].Option.Id">
+                    @question.QuestionOptions[1].Option.Name
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault"
+                    id="@question.QuestionOptions[2].Option.Id" checked>
+                <label class="form-check-label list-group-item" for="@question.QuestionOptions[2].Option.Id">
+                    @question.QuestionOptions[2].Option.Name
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault"
+                    id="@question.QuestionOptions[3].Option.Id" checked>
+                <label class="form-check-label list-group-item" for="@question.QuestionOptions[3].Option.Id">
+                    @question.QuestionOptions[3].Option.Name
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault"
+                    id="@question.QuestionOptions[4].Option.Id" checked>
+                <label class="form-check-label list-group-item" for="@question.QuestionOptions[4].Option.Id">
+                    @question.QuestionOptions[4].Option.Name
+                </label>
+            </div>
+        }
+    </ul>
+</div>
+
+@* <p>@Model[0].Name</p>
+<p>@Model[0].UserId</p> *@
 
 
-<p>@Model.Name</p>
-<p>@Model.Id</p>

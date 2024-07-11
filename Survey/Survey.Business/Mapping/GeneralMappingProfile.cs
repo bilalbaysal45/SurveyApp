@@ -8,6 +8,7 @@ using Survey.Shared.Dtos.OptionDtos;
 using Survey.Shared.Dtos.QuestionDtos;
 using Survey.Shared.Dtos.QuestionOptionDtos;
 using Survey.Shared.Dtos.SurveyDtos;
+using Survey.Shared.Dtos.AnswerDtos;
 
 namespace Survey.Business.Mapping
 {
@@ -32,6 +33,11 @@ namespace Survey.Business.Mapping
 
             //QuestionOption
             CreateMap<QuestionOption, QuestionOptionDto>().ReverseMap();
+
+            //Answers
+            CreateMap<Answer, AnswerDto>().ReverseMap();
+            CreateMap<Answer, AddAnswerDto>().ReverseMap();
+            CreateMap<Answer, UpdateAnswerDto>().ReverseMap();
         }
     }
 }

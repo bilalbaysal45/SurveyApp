@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Survey.MVC.Areas.User.Data;
+using Survey.MVC.Areas.User.Models;
 using Survey.MVC.Models;
 
 namespace Survey.MVC.Areas.User.Controllers
@@ -15,6 +16,7 @@ namespace Survey.MVC.Areas.User.Controllers
     public class UserController : Controller
     {
         private readonly SignInManager<IdentityUser> _signInManager;
+        private static string userId;
 
         private readonly ILogger<UserController> _logger;
 
@@ -24,7 +26,8 @@ namespace Survey.MVC.Areas.User.Controllers
             _logger = logger;
         }
         public async Task<IActionResult> Index(string id)
-        {
+        { 
+            userId = id;
             var user = await _signInManager.UserManager.FindByIdAsync(id);
             return View(user);
         }
@@ -48,8 +51,15 @@ namespace Survey.MVC.Areas.User.Controllers
             var questionDAL = new QuestionDAL(RequestUris.GetQuestionsBySurveyId);
             var questions = await questionDAL.GetQuestionsBySurveyId(RequestUris.GetQuestionsBySurveyId,id);
 
-            //Anket çek, o anketin sorularını ve şıklarını çek
-            return View(survey);
+            var surveyanswers = new SurveyAnswerViewModel();
+            surveyanswers.Questions = questions;
+            surveyanswers.Answers = new List<AddAnswerViewModel>();
+            for (int i = 0; i < questions.Count; i++)
+            {
+                surveyanswers.Answers.Add(new AddAnswerViewModel{Name = "",Description="",CreatedDate=DateTime.Now,ModifiedDate=DateTime.Now,UserId = userId,OptionId=0,QuestionId=0});                
+            }
+
+            return View(surveyanswers);
         }
     }
 }

@@ -28,6 +28,9 @@ builder.Services.AddScoped<IQuestionService, QuestionManager>();
 builder.Services.AddScoped<IOptionRepository, EfCoreOptionRepository>();
 builder.Services.AddScoped<IOptionService, OptionManager>();
 
+builder.Services.AddScoped<IAnswerService, AnwerManager>();
+builder.Services.AddScoped<IAnswerRepository, EfCoreAnswerRepository>();
+
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

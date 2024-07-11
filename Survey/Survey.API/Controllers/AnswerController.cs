@@ -5,45 +5,45 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Survey.Business.Abstract;
-using Survey.Shared.Dtos.OptionDtos;
+using Survey.Shared.Dtos.AnswerDtos;
 
 namespace Survey.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class OptionController : ControllerBase
+    public class AnswerController : ControllerBase
     {
-        private readonly IOptionService _optionManager;
+        private readonly IAnswerService _answerManager;
 
-        public OptionController(IOptionService optionManager)
+        public AnswerController(IAnswerService answerManager)
         {
-            _optionManager = optionManager;
+            _answerManager = answerManager;
         }
-        [HttpGet("/getOptions")]
+        [HttpGet("/getAnswers")]
         public IActionResult GetAll()
         {
-            var response = _optionManager.GetAll();
+            var response = _answerManager.GetAll();
             var jsonResponse = JsonSerializer.Serialize(response);
             return Ok(jsonResponse);
         }
-        [HttpGet("/getOption/{id}")]
+        [HttpGet("/getAnswer/{id}")]
         public IActionResult GetById(int id)
         {
-            var response = _optionManager.GetById(id);
+            var response = _answerManager.GetById(id);
             var jsonResponse = JsonSerializer.Serialize(response);
             return Ok(jsonResponse);
         }
-        [HttpPost("/addOption")]
-        public IActionResult Create(AddOptionDto addOption)
+        [HttpPost("/addAnswer")]
+        public IActionResult Create(AddAnswerDto addAnswer)
         {
-            var response = _optionManager.Create(addOption);
+            var response = _answerManager.Create(addAnswer);
             var jsonResponse = JsonSerializer.Serialize(response);
             return Ok(jsonResponse);
         }
-        [HttpPut("/updateOption")]
-        public IActionResult Update(UpdateOptionDto updateOption)
+        [HttpPut("/updateAnswer")]
+        public IActionResult Update(UpdateAnswerDto updateAnswerDto)
         {
-            var response = _optionManager.Update(updateOption);
+            var response = _answerManager.Update(updateAnswerDto);
             var JsonResponse = JsonSerializer.Serialize(response);
             return Ok(JsonResponse);
         }
