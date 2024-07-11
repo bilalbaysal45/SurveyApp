@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Survey.Data.Concrete.EfCore.Contexts;
 
@@ -10,9 +11,11 @@ using Survey.Data.Concrete.EfCore.Contexts;
 namespace Survey.Data.Migrations
 {
     [DbContext(typeof(SurveyDbContext))]
-    partial class SurveyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240711150439_AnswerMigration")]
+    partial class AnswerMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.14");
@@ -171,8 +174,10 @@ namespace Survey.Data.Migrations
                     b.Property<int>("QuestionId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("UserId1")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -181,7 +186,7 @@ namespace Survey.Data.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId1");
 
                     b.ToTable("Answers");
                 });
@@ -410,10 +415,7 @@ namespace Survey.Data.Migrations
 
                     b.HasOne("Survey.Entity.Concrete.User", "User")
                         .WithMany("Answers")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired()
-                        .HasConstraintName("FK_Answers_AspNetUsers");
+                        .HasForeignKey("UserId1");
 
                     b.Navigation("Option");
 
