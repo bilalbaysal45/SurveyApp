@@ -27,8 +27,12 @@ namespace Survey.MVC.Areas.User.Controllers
         }
         public async Task<IActionResult> Index(string id)
         { 
+            ModelState.Clear();
             userId = id;
             var user = await _signInManager.UserManager.FindByIdAsync(id);
+            if(ModelState.IsValid){
+                return View("Index",user);
+            }
             return View(user);
         }
         public IActionResult ChangePassword()
@@ -41,7 +45,7 @@ namespace Survey.MVC.Areas.User.Controllers
             var surveys = await surveyDAL.GetAll();
             return View(surveys);
         }
-        public async Task<IActionResult> Survey(int id)
+        public async Task<IActionResult> Survey(int id,int[] selectedValues, string userIdFromJavaScript)
         {
             //anket çekildi
             var surveyDAL = new SurveyDAL(RequestUris.GetSurveyById);
@@ -60,6 +64,13 @@ namespace Survey.MVC.Areas.User.Controllers
             }
 
             return View(surveyanswers);
+        }
+        [HttpPost]
+        public IActionResult UserAnswers(int[] selectedValues, string userIdFromJavaScript)
+        {
+            string a = userIdFromJavaScript;
+
+            return RedirectToAction("Index", "User",new { area = "User", id = userIdFromJavaScript });
         }
     }
 }

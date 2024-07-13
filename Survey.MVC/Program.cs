@@ -8,6 +8,8 @@ builder.Services.AddDbContext<IdentityDataContext>(options => options.UseSqlite(
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<IdentityDataContext>();
 
+
+
 builder.Services.AddRazorPages();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -22,19 +24,24 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
 
+
+
 app.UseAuthorization();
 app.MapAreaControllerRoute(
     name: "User",
     areaName: "User",
-    pattern: "User/{controller=Home}/{action=Index}/{id?}"
+    pattern: "User/{controller=User}/{action=Index}/{id?}"
 );
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+
 app.MapRazorPages();
 app.Run();

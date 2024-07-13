@@ -51,17 +51,6 @@ body {
   grid-area: 2 / 1 / 4 / 2;
 }
 
-/* .menu a{
-  text-decoration: none;
-  margin: 5px;
-  border: 1px solid white;
-  font-size: 15px;
-  color: white;
-}
-.menu a:hover{
-  opacity: .9;
-} */
-
 .content {
   grid-area: 2 / 2 / 4 / 6;
 }
@@ -74,4 +63,7 @@ body {
 
 .my-btn{
   width: 100%;
+}
+.my-w{
+  width: 100px;
 }

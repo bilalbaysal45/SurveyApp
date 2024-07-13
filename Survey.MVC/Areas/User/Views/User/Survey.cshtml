@@ -1,61 +1,67 @@
 @model SurveyAnswerViewModel
 @{
     ViewData["Title"] = "Survey";
+    int index = Model.Questions[0].Id; 
 }
-<p class="card-text bg-warning">In top-left, there is a an icon with 3 line. You can click that icon and see the surveys that
+<p class="card-text bg-warning">In top-left, there is a an icon with 3 line. You can click that icon and see the surveys
+    that
     you didn't participate yet.</p>
 
 <div class="card">
-    <ul class="list-group list-group-flush">
-        @foreach(var question in Model.Questions)
+    <ul id="deneme" class="list-group list-group-flush">
+        @for(int i = 0; i < Model.Questions.Count;i++)
         {
-                @* <li class="list-group-item">@question.Name</li>
-                <li class="list-group-item">@question.QuestionOptions[0].Option.Name</li>
-                <li class="list-group-item">@question.QuestionOptions[1].Option.Name</li>
-                <li class="list-group-item">@question.QuestionOptions[2].Option.Name</li>
-                <li class="list-group-item">@question.QuestionOptions[3].Option.Name</li>
-                <li class="list-group-item">@question.QuestionOptions[4].Option.Name</li> *@
-            <li class="list-group-item">@question.Name</li>
-            <div class="form-check">
-                <input class="form-check-input " type="radio" name="flexRadioDefault"
-                    id="@question.QuestionOptions[0].Option.Id">
-                <label class="form-check-label list-group-item" for="@question.QuestionOptions[0].Option.Id">
-                    @question.QuestionOptions[0].Option.Name
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault"
-                    id="@question.QuestionOptions[1].Option.Id" checked>
-                <label class="form-check-label list-group-item" for="@question.QuestionOptions[1].Option.Id">
-                    @question.QuestionOptions[1].Option.Name
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault"
-                    id="@question.QuestionOptions[2].Option.Id" checked>
-                <label class="form-check-label list-group-item" for="@question.QuestionOptions[2].Option.Id">
-                    @question.QuestionOptions[2].Option.Name
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault"
-                    id="@question.QuestionOptions[3].Option.Id" checked>
-                <label class="form-check-label list-group-item" for="@question.QuestionOptions[3].Option.Id">
-                    @question.QuestionOptions[3].Option.Name
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault"
-                    id="@question.QuestionOptions[4].Option.Id" checked>
-                <label class="form-check-label list-group-item" for="@question.QuestionOptions[4].Option.Id">
-                    @question.QuestionOptions[4].Option.Name
-                </label>
+            <div id="question@(i)" @(i != 0 ? "hidden" : "")>
+                <li class="list-group-item">@Model.Questions[i].Name</li>
+                <div class="form-check">
+                    <input class="form-check-input " type="radio" name="flexRadioDefault@(i)"
+                        id="@Model.Questions[i].QuestionOptions[0].Option.Id"
+                        value="@Model.Questions[i].QuestionOptions[0].Option.Id">
+                    <label class="form-check-label list-group-item" for="@Model.Questions[i].QuestionOptions[0].Option.Id">
+                        @Model.Questions[i].QuestionOptions[0].Option.Name
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault@(i)"
+                        id="@Model.Questions[i].QuestionOptions[1].Option.Id"
+                        value="@Model.Questions[i].QuestionOptions[1].Option.Id">
+                    <label class="form-check-label list-group-item" for="@Model.Questions[i].QuestionOptions[1].Option.Id">
+                        @Model.Questions[i].QuestionOptions[1].Option.Name
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault@(i)"
+                        id="@Model.Questions[i].QuestionOptions[2].Option.Id"
+                        value="@Model.Questions[i].QuestionOptions[2].Option.Id">
+                    <label class="form-check-label list-group-item" for="@Model.Questions[i].QuestionOptions[2].Option.Id">
+                        @Model.Questions[i].QuestionOptions[2].Option.Name
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault@(i)"
+                        id="@Model.Questions[i].QuestionOptions[3].Option.Id"
+                        value="@Model.Questions[i].QuestionOptions[3].Option.Id">
+                    <label class="form-check-label list-group-item" for="@Model.Questions[i].QuestionOptions[3].Option.Id">
+                        @Model.Questions[i].QuestionOptions[3].Option.Name
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault@(i)"
+                        id="@Model.Questions[i].QuestionOptions[4].Option.Id"
+                        value="@Model.Questions[i].QuestionOptions[4].Option.Id">
+                    <label class="form-check-label list-group-item" for="@Model.Questions[i].QuestionOptions[4].Option.Id">
+                        @Model.Questions[i].QuestionOptions[4].Option.Name
+                    </label>
+                </div>
+                <div class="w-100 d-flex justify-content-evenly">
+                    <a id="prev-button@(i)" onclick="prevButton(@(i))" class="btn btn-md btn-primary my-w" @(i == 0 ? "hidden" : "")>Previous</a>
+                    <a id="next-button@(i)" onclick="nextButton(@(i))" class="btn btn-md btn-primary my-w" @(i == Model.Questions.Count - 1 ? "hidden" : "")>Next</a>
+                    <a onclick="finishButton(@i,'@HttpUtility.JavaScriptStringEncode(Model.Answers[i].UserId)')"
+                        class="btn btn-md btn-primary my-w" @(i ==          Model.Questions.Count - 1 ? "" : "hidden")>Finish</a>
+                </div>
             </div>
         }
     </ul>
 </div>
-
 @* <p>@Model[0].Name</p>
 <p>@Model[0].UserId</p> *@
-
-
