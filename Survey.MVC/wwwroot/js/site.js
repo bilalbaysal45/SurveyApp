@@ -23,30 +23,30 @@ function nextButton(currentIndex) {
     }
 }
 // soru adedi parametre olarak geliyor
-function finishButton(lastIndex, userId) {
-    console.log(userId)
-    let i = 0;
-    let selectedValues = [];
-    while (i <= lastIndex) {
-        let groupValue = parseInt($(`input[name="flexRadioDefault${i}"]:checked`).val());
-        i++;
-        selectedValues.push(groupValue);
-    }
-    console.log(typeof userId);
-    console.log("userId:", userId);
-    // var data = { selectedValues: selectedValues, userIdFromJavaScript: userId };
-    $.ajax({
-        type: 'POST',
-        url: '/User/User/UserAnswers',
-        data: { selectedValues: selectedValues, userIdFromJavaScript: userId },
-        traditional: true, // This is important to send the array correctly
-        success: function (data) {
-            console.log(data);
-        },
-        error: function (xhr, status, error) {
-            console.error(error);
-        }
-    });
-}
+// function finishButton(lastIndex, userId) {
+//     console.log(userId)
+//     let i = 0;
+//     let selectedValues = [];
+//     while (i <= lastIndex) {
+//         let groupValue = parseInt($(`input[name="flexRadioDefault${i}"]:checked`).val());
+//         i++;
+//         selectedValues.push(groupValue);
+//     }
+//     console.log(typeof userId);
+//     console.log("userId:", userId);
+//     // var data = { selectedValues: selectedValues, userIdFromJavaScript: userId };
+//     $.ajax({
+//         type: 'POST',
+//         url: '/User/User/UserAnswers',
+//         data: { selectedValues: selectedValues, userIdFromJavaScript: userId },
+//         traditional: true, // This is important to send the array correctly
+//         success: function (data) {
+//             console.log(data);
+//         },
+//         error: function (xhr, status, error) {
+//             console.error(error);
+//         }
+//     });
+// }
 
 

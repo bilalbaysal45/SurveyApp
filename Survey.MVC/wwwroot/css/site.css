@@ -67,3 +67,6 @@ body {
 .my-w{
   width: 100px;
 }
+.my-hidden{
+  display: none;
+}

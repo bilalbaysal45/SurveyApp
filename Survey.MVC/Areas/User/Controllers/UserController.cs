@@ -45,7 +45,7 @@ namespace Survey.MVC.Areas.User.Controllers
             var surveys = await surveyDAL.GetAll();
             return View(surveys);
         }
-        public async Task<IActionResult> Survey(int id,int[] selectedValues, string userIdFromJavaScript)
+        public async Task<IActionResult> Survey(int id)
         {
             //anket çekildi
             var surveyDAL = new SurveyDAL(RequestUris.GetSurveyById);
@@ -65,12 +65,26 @@ namespace Survey.MVC.Areas.User.Controllers
 
             return View(surveyanswers);
         }
-        [HttpPost]
-        public IActionResult UserAnswers(int[] selectedValues, string userIdFromJavaScript)
+        public IActionResult UserAnswers()
         {
-            string a = userIdFromJavaScript;
+            return RedirectToAction("Index", "User", new { area = "User", id = _signInManager.UserManager.GetUserId(User)});
+        }
+        // [HttpPost]
+        // public IActionResult UserAnswers(int[] selectedValues, string userIdFromJavaScript)
+        // {
+        //     string a = userIdFromJavaScript;
 
-            return RedirectToAction("Index", "User",new { area = "User", id = userIdFromJavaScript });
+        //     return RedirectToAction("Index", "User",new { area = "User", id = userIdFromJavaScript });
+        // }
+        [HttpPost]
+        public async Task<IActionResult> UserAnswers(List<int> flexRadioDefault,List<int> questions)
+        {
+            if(ModelState.IsValid && flexRadioDefault.Count == questions.Count)
+            {
+                // cevapları buradan gönderecem
+                return RedirectToAction("Index", "User", new { area = "User", id = _signInManager.UserManager.GetUserId(User) });
+            }
+            return View();
         }
     }
 }
