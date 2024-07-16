@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Survey.MVC.Areas.User.Data.Abstract;
@@ -15,11 +16,34 @@ namespace Survey.MVC.Areas.User.Data
         {
             _requestUri = requestUri;
         }
-        public TEntity Create(TEntity entity)
+        public async Task<TEntity> Create(TEntity entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (var httpClient = new HttpClient())
+                {
+                    Root<TEntity> rootTEntity = new Root<TEntity>();
+                    var content = JsonSerializer.Serialize(entity);
+                    StringContent stringContent = new StringContent(content, Encoding.UTF8, "application/json");
+                    var response = await httpClient.PostAsync(_requestUri, stringContent);
+                    int a = 1;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var contentResponse = await response.Content.ReadAsStringAsync();
+                        rootTEntity = JsonSerializer.Deserialize<Root<TEntity>>(contentResponse);
+                        return rootTEntity.Data;
+                    }
+                }
+            }
+            catch (System.Exception)
+            {
+                
+                throw;
+            }
+            return null;
+            
         }
-
+            
         public void Delete(TEntity entity)
         {
             throw new NotImplementedException();

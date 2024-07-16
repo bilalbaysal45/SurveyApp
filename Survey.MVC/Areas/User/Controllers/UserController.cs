@@ -82,6 +82,20 @@ namespace Survey.MVC.Areas.User.Controllers
             if(ModelState.IsValid && flexRadioDefault.Count == questions.Count)
             {
                 // cevapları buradan gönderecem
+                for(int i = 0; i < questions.Count;i++)
+                {
+                    var answer = new AnswerDAL(RequestUris.AddAnswer);
+                    var addAnswerViewModel = new AddAnswerViewModel{
+                        Name = "Deneme2",
+                        Description = "Deneme2", 
+                        CreatedDate = DateTime.Now, 
+                        ModifiedDate = DateTime.Now,                          
+                        UserId = _signInManager.UserManager.GetUserId(User),
+                        OptionId = flexRadioDefault[i],
+                        QuestionId=questions[i]};
+                    var response = answer.Create(addAnswerViewModel);
+
+                }
                 return RedirectToAction("Index", "User", new { area = "User", id = _signInManager.UserManager.GetUserId(User) });
             }
             return View();
