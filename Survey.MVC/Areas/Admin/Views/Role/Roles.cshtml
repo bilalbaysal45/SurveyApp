@@ -1,0 +1,17 @@
+@model List<IdentityRole>
+@{
+    ViewData["Title"] = "Roles";
+}
+
+
+<div class="card bg-warning">
+    <div class="card-body">
+        <p class="card-text">In top-left, there is a an icon with 3 line. You can click that icon and see the surveys that you didn't participate yet.</p>
+    </div>
+    <ul class="list-group list-group-flush">
+            @foreach(var role in Model)
+{
+        <li class="list-group-item">@role.Name --><a asp-action="Update" asp-controller="Role" asp-area="Admin" asp-route-id="@role.Id">Update</a></li>
+}
+    </ul>
+</div>

@@ -6,7 +6,11 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 builder.Services.AddDbContext<IdentityDataContext>(options => options.UseSqlite(connectionString));
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<IdentityDataContext>();
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                                    .AddRoles<IdentityRole>().AddEntityFrameworkStores<IdentityDataContext>();
+
+builder.Services.AddTransient<RoleManager<IdentityRole>>();
+
 
 
 
@@ -37,6 +41,11 @@ app.MapAreaControllerRoute(
     name: "User",
     areaName: "User",
     pattern: "User/{controller=User}/{action=Index}/{id?}"
+);
+app.MapAreaControllerRoute(
+    name: "Admin",
+    areaName: "Admin",
+    pattern: "Admin/{controller=Admin}/{action=Index}/{id?}"
 );
 app.MapControllerRoute(
     name: "default",

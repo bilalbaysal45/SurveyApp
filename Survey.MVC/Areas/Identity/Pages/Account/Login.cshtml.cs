@@ -117,7 +117,7 @@ namespace Survey.MVC.Areas.Identity.Pages.Account
                     var user = await _signInManager.UserManager.FindByEmailAsync(Input.Email);
                     
                     _logger.LogInformation("User logged in.");
-                    return RedirectToAction("Index", "User", new { area = "User" ,user.Id});
+                    return RedirectToAction("Index", "Admin", new { area = "Admin" ,user.Id});
                     
                 }
                 // if (result.RequiresTwoFactor)

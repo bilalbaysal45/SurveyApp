@@ -1,0 +1,18 @@
+@model UpdateRoleViewModel
+@{
+    ViewData["Title"] = "Update";
+}
+<input type="hidden" asp-for="Id">
+<div class="card bg-warning">
+    <div class="card-body">
+        <p class="card-text">In top-left, there is a an icon with 3 line. You can click that icon and see the surveys
+            that you didn't participate yet.</p>
+    </div>
+    <form class="bg-white mt-2" asp-action="Update" asp-controller="Role" asp-area="Admin" method="post">
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label">Role Name: </label>
+            <input asp-for="Name" class="form-control" id="role-name">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
