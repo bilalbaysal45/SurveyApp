@@ -26,5 +26,9 @@ namespace Survey.MVC.Areas.Admin.Controllers
         {
             return View();
         }
+        public IActionResult Surveys()
+        {
+            return  View();
+        }
     }
 }

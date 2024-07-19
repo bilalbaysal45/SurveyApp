@@ -26,7 +26,6 @@ namespace Survey.MVC.Areas.User.Data
                     var content = JsonSerializer.Serialize(entity);
                     StringContent stringContent = new StringContent(content, Encoding.UTF8, "application/json");
                     var response = await httpClient.PostAsync(_requestUri, stringContent);
-                    int a = 1;
                     if (response.IsSuccessStatusCode)
                     {
                         var contentResponse = await response.Content.ReadAsStringAsync();
@@ -90,9 +89,30 @@ namespace Survey.MVC.Areas.User.Data
             return null;
         }
 
-        public TEntity Update(TEntity entity)
+        public async Task<TEntity> Update(TEntity entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (var httpClient = new HttpClient())
+                {
+                    Root<TEntity> rootTEntity = new Root<TEntity>();
+                    var content = JsonSerializer.Serialize(entity);
+                    StringContent stringContent = new StringContent(content, Encoding.UTF8, "application/json");
+                    var response = await httpClient.PutAsync(_requestUri, stringContent);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var contentResponse = await response.Content.ReadAsStringAsync();
+                        rootTEntity = JsonSerializer.Deserialize<Root<TEntity>>(contentResponse);
+                        return rootTEntity.Data;
+                    }
+                }
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+            return null;
         }
     }
 }

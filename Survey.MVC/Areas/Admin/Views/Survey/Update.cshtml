@@ -1,0 +1,24 @@
+@model UpdateSurveyViewModel
+@{
+    ViewData["Title"] = "Update";
+}
+
+<input type="hidden" asp-for="Id">
+<input type="datetime" asp-for="CreatedDate" hidden>
+<div class="card bg-warning">
+    <div class="card-body">
+        <p class="card-text">In top-left, there is a an icon with 3 line. You can click that icon and see the surveys
+            that you didn't participate yet.</p>
+    </div>
+    <form class="bg-white mt-2" asp-action="Update" asp-controller="Survey" asp-area="Admin" method="post">
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label">Survey Name: </label>
+            <input asp-for="Name" class="form-control" id="survey-name">
+        </div>
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label">Survey Description: </label>
+            <input asp-for="Description" class="form-control" id="survey-description">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

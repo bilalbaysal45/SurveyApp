@@ -11,7 +11,7 @@ namespace Survey.MVC.Areas.User.Data.Abstract
         Task<TEntity> Create(TEntity entity);
         Task<List<TEntity>> GetAll();
         Task<TEntity> GetById(int id);
-        TEntity Update(TEntity entity);
+        Task<TEntity> Update(TEntity entity);
         void Delete(TEntity entity);
     }
 }
