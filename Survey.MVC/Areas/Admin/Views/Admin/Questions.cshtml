@@ -1,0 +1,16 @@
+@{
+    ViewData["Title"] = "Questions";
+}
+
+<div class="card bg-warning">
+    <div class="card-body">
+        <p class="card-text">In top-left, there is a an icon with 3 line. You can click that icon and see the surveys
+            that you didn't participate yet.</p>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item"><a asp-area="Admin" asp-controller="Question" asp-action="Create">Create Question</a>
+        </li>
+        @* <li class="list-group-item"><a asp-area="Admin" asp-controller="Question" asp-action="Surveys">Update Survey</a>
+        </li> *@
+    </ul>
+</div>

@@ -1,0 +1,41 @@
+@model AddQuestionViewModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="card bg-warning">
+    <div class="card-body">
+        <p class="card-text">In top-left, there is a an icon with 3 line. You can click that icon and see the surveys
+            that you didn't participate yet.</p>
+    </div>
+    <form class="bg-white mt-2" asp-action="Create" asp-controller="Question" asp-area="Admin" method="post">
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label">Question: </label>
+            <input asp-for="Name" class="form-control" id="question-name">
+        </div>
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label">Question Description: </label>
+            <input asp-for="Description" class="form-control" id="question-description">
+        </div>
+        <div class="mb-3">
+            <select asp-for="SurveyId" id="select-field">
+                <optgroup label="Surveys">
+                    @foreach (var survey in ViewBag.Surveys)
+                    {
+                        <option value="@survey.Id">@survey.Name</option>
+                    }
+                </optgroup>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+@* no need for the script*@
+@* <script>
+    const selectField = document.getElementById('select-field');
+    const inputField = document.getElementById('input-hidden-value');
+
+    selectField.addEventListener('change', () => {
+        inputField.value = selectField.value;
+    });
+</script> *@
