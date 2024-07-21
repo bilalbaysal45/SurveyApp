@@ -68,7 +68,5 @@ namespace Survey.MVC.Areas.Admin.Controllers
             }
             return View("Index");
         }
-
-
     }
 }

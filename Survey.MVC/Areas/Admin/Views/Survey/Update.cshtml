@@ -19,6 +19,9 @@
             <label asp-for="Description" class="form-label">Survey Description: </label>
             <input asp-for="Description" class="form-control" id="survey-description">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="d-flex justify-content-around">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a asp-area="Admin" asp-controller="Question" asp-action="QuestionsOfSurvey" asp-route-id="@Model.Id" class="btn btn-primary">Update Questions</a>
+        </div>
     </form>
 </div>

@@ -45,7 +45,26 @@ namespace Survey.MVC.Areas.Admin.Controllers
             }
             return View("Index");
         }
-        
-
+        public async Task<IActionResult> QuestionsOfSurvey(int id) // surveyId gelecek
+        {
+            var questionDAL = new QuestionDAL(RequestUris.GetQuestionsBySurveyId);
+            var questions = await questionDAL.GetQuestionsBySurveyId(RequestUris.GetQuestionsBySurveyId, id);
+            return View(questions);
+        }
+        public async Task<IActionResult> Update(int id) // question gelecek
+        {
+            var questionDAL = new QuestionDAL(RequestUris.GetQuestionById);
+            var question = await questionDAL.GetById(id);
+            return View(question);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Update(QuestionViewModel question)
+        {
+                // var updateQuestion = new UpdateQuestionViewModel { Id = question.Id, Name = question.Name, Description = question.Description, SurveyId = question.SurveyId };
+                question.ModifiedDate = DateTime.Now;
+                var questionDAL = new QuestionDAL(RequestUris.UpdateQuestion);
+                var response = await questionDAL.Update(question);
+                return View("Index");
+        }
     }
 }

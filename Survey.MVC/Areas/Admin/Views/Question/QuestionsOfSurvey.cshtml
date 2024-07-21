@@ -1,0 +1,22 @@
+@model List<QuestionViewModel>
+@{
+    ViewData["Title"] = "QuestionsOfSurvey";
+}
+    <div class="card bg-warning">
+        <div class="card-body">
+            <p class="card-text">In top-left, there is a an icon with 3 line. You can click that icon and see the surveys
+                that you didn't participate yet.</p>
+        </div>
+@foreach(var question in Model)
+{
+        var index = Array.IndexOf(Model.ToArray(), question);
+        <input type="hidden" asp-for="@Model[@index].Id">
+        <div class="d-flex justify-content-around align-items-center">
+            <div class="mb-3">
+                <label asp-for="@Model[@index].Name" class="form-label">Question @index Name: </label>
+            </div>
+            <input readonly asp-for="@Model[@index].Name" class="form-control" id="question-name">
+            <a asp-area="Admin" asp-controller="Question" asp-action="Update" asp-route-id="@Model[@index].Id" class="btn btn-primary">Update</a>
+        </div>
+}
+    </div>
