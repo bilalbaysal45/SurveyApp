@@ -115,9 +115,19 @@ namespace Survey.MVC.Areas.Identity.Pages.Account
                 if (result.Succeeded)//result.Succeeded
                 {
                     var user = await _signInManager.UserManager.FindByEmailAsync(Input.Email);
+                    var userRole = await _signInManager.UserManager.GetRolesAsync(user);
+                    if (userRole.Contains("Admin") || userRole.Contains("Moderator"))
+                    {
+                        _logger.LogInformation("User logged in.");
+                        return RedirectToAction("Index", "Admin", new { area = "Admin", user.Id });
+                    }
+                    else
+                    {
+                        _logger.LogInformation("User logged in.");
+                        return RedirectToAction("Index", "User", new { area = "User", user.Id });
+                    }
+
                     
-                    _logger.LogInformation("User logged in.");
-                    return RedirectToAction("Index", "Admin", new { area = "Admin" ,user.Id});
                     
                 }
                 // if (result.RequiresTwoFactor)
