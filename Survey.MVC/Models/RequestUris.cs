@@ -19,6 +19,8 @@ namespace Survey.MVC.Models
         public static string UpdateQuestion { get; set; } = "http://localhost:5077/updateQuestion";
         public static string GetQuestionsBySurveyId { get; set; } = "http://localhost:5077/getQuestionsBySurveyId";
         public static string AddAnswer { get; set; } = "http://localhost:5077/addAnswer";
+        public static string AddSurveyUser { get; set; } = "http://localhost:5077/addSurveyUser";
+
 
     }
 }

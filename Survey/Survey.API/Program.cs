@@ -31,6 +31,11 @@ builder.Services.AddScoped<IOptionService, OptionManager>();
 builder.Services.AddScoped<IAnswerService, AnwerManager>();
 builder.Services.AddScoped<IAnswerRepository, EfCoreAnswerRepository>();
 
+builder.Services.AddScoped<ISurveyUserService, SurveyUserManager>();
+builder.Services.AddScoped<ISurveyUserRepository, EfCoreSurveyUserRepository>();
+
+
+
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

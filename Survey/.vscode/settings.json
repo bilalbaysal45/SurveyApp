@@ -1,0 +1,9 @@
+{
+    
+        "workbench.settings.useSplitJSON": true,
+        "editor.fontSize": 14,
+        "files.associations": {
+            "*.js": "javascript"
+        }
+    
+}

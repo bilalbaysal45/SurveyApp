@@ -20,10 +20,12 @@ namespace Survey.Data.Concrete.EfCore.Contexts
         public DbSet<Option> Options { get; set; }
         public DbSet<QuestionOption> QuestionOptions { get; set; }
         public DbSet<Answer> Answers { get; set; }
+        public DbSet<SurveyUser> SurveyUsers {get;set;}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(QuestionOptionConfig).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(SurveyUserConfig).Assembly);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(Answer).Assembly);
             base.OnModelCreating(modelBuilder);
         }

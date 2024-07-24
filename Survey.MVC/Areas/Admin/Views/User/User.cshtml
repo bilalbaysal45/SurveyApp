@@ -1,0 +1,20 @@
+@model IdentityUser
+@{
+    ViewData["Title"] = "User";
+}
+
+<div class="card bg-warning">
+    <div class="card-body">
+    <p class="card-text">In top-left, there is a an icon with 3 line. You can click that icon and see the surveys that you didn't participate yet.</p>
+    </div>
+    <div class="card-header bg-white">
+        <p class="text-center text-primary">@Model.UserName</p>
+    </div>
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0 w-100 bg-white">
+        @foreach(var survey in ViewBag.Surveys)
+        {
+            <li class="list-group-item d-flex justify-content-between">@survey.Name <a class="btn btn-primary" asp-action="AddSurveyToUser"
+                    asp-controller="User" asp-area="Admin" asp-route-surveyId="@survey.Id" asp-route-userId="@Model.Id">Add</a></li>
+        }
+    </ul>
+</div>

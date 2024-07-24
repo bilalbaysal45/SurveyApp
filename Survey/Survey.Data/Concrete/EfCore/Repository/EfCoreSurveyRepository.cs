@@ -14,5 +14,6 @@ namespace Survey.Data.Concrete.EfCore.Repository
         {
         }
         SurveyDbContext Context { get{ return _dbContext as SurveyDbContext; } }
+        
     }
 }
