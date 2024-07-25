@@ -24,8 +24,9 @@ namespace Survey.MVC.Areas.Admin.Controllers
             _user = user;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string Error)
         {
+            ViewBag.Error = Error;
             var users = _user.Users.ToList();
             return View(users);
         }
@@ -40,7 +41,15 @@ namespace Survey.MVC.Areas.Admin.Controllers
         {
             var surveyUser = new SurveyUserDAL(RequestUris.AddSurveyUser);
             var response = await surveyUser.Create(new SurveyUserViewModel{SurveyId = surveyId, UserId=userId,IsDone = false});
-            return RedirectToAction("Index");
+            if(response.Error is null)
+            {
+                return RedirectToAction("Index", new{response.Error});
+
+            }
+            else
+            {
+                return RedirectToAction("Index",new{response.Error});
+            }
         }
     }
 }

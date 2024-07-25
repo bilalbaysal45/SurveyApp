@@ -25,17 +25,21 @@ namespace Survey.Business.Concrete
         public ResponseDto<AddSurveyUserDto> Create(AddSurveyUserDto newSurveyUser)
         {
             var surveyUser = _mapper.Map<SurveyUser>(newSurveyUser);
+            var x = _surveyUserRepository.GetAll().Find(x=> x.UserId == newSurveyUser.UserId && x.SurveyId == newSurveyUser.SurveyId);
             try
             {
-                var response = _surveyUserRepository.Create(surveyUser);
-                if (response != null)
+                if (x != null)
                 {
+                    return new ResponseDto<AddSurveyUserDto> { Data = null, Error = "Already Exist" };
+                }
+                else
+                {
+                    var response = _surveyUserRepository.Create(surveyUser);
                     return new ResponseDto<AddSurveyUserDto> { Data = _mapper.Map<AddSurveyUserDto>(response), Error = null };
                 }
             }
             catch (System.Exception)
             {
-
                 return new ResponseDto<AddSurveyUserDto> { Data = null, Error = "System Error" };
             }
 

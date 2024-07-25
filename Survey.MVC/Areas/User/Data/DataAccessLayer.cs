@@ -16,7 +16,7 @@ namespace Survey.MVC.Areas.User.Data
         {
             _requestUri = requestUri;
         }
-        public async Task<TEntity> Create(TEntity entity)
+        public async Task<Root<TEntity>> Create(TEntity entity)
         {
             try
             {
@@ -30,13 +30,12 @@ namespace Survey.MVC.Areas.User.Data
                     {
                         var contentResponse = await response.Content.ReadAsStringAsync();
                         rootTEntity = JsonSerializer.Deserialize<Root<TEntity>>(contentResponse);
-                        return rootTEntity.Data;
+                        return rootTEntity;
                     }
                 }
             }
             catch (System.Exception)
             {
-                
                 throw;
             }
             return null;
