@@ -13,5 +13,6 @@ namespace Survey.Business.Abstract
         ResponseDto<List<SurveyDto>> GetAll();
         ResponseDto<SurveyDto> GetById(int id); 
         ResponseDto<UpdateSurveyDto> Update(UpdateSurveyDto updateSurveyDto);
+        ResponseDto<List<SurveyDto>> GetSurveys(string userId);
     }
 }

@@ -33,8 +33,8 @@ namespace Survey.MVC.Areas.Admin.Controllers
         public async Task<IActionResult> User(string id)
         {
             var user = await _user.FindByIdAsync(id);
-            var survey = new SurveyDAL(RequestUris.GetAllSurveys);
-            ViewBag.Surveys = await survey.GetAll();
+            var surveyDAL = new SurveyDAL(RequestUris.GetAllSurveys);
+            ViewBag.Surveys = await surveyDAL.GetSurveys(RequestUris.GetSurveysByUserId,user.Id);
             return View(user);
         }
         public async Task<IActionResult> AddSurveyToUser(int surveyId,string userId)

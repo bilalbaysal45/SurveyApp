@@ -108,6 +108,27 @@ namespace Survey.Business.Concrete
             }
             return new ResponseDto<UpdateSurveyDto> { Data = null, Error = "Update Fail Somehow" };
         }
+        public ResponseDto<List<SurveyDto>> GetSurveys(string userId)
+        {
+            var surveyDtos = new ResponseDto<List<SurveyDto>>();
+            var surveys = new List<Entity.Concrete.Survey>();
+            try
+            {
+                surveys = _surveyRepository.GetSurveys(userId);
+                if (surveys.Count != 0)
+                {
+                    surveyDtos.Data = _mapper.Map<List<SurveyDto>>(surveys);
+                    surveyDtos.Error = null;
+                    return surveyDtos;
+                }
+            }
+            catch (System.Exception)
+            {
 
+                return new ResponseDto<List<SurveyDto>> { Data = null, Error = "System Excepcion" };
+            }
+
+            return new ResponseDto<List<SurveyDto>> { Data = null, Error = "Not Found" };
+        }
     }
 }
