@@ -10,5 +10,6 @@ namespace Survey.Entity.Concrete
     {
         public int SurveyId { get; set; }
         public List<QuestionOption> QuestionOptions{ get; set; }
+        public List<Answer> Answers{ get; set;}
     }
 }

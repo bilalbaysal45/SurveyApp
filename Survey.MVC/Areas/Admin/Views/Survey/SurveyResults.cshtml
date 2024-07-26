@@ -1,0 +1,93 @@
+@model List<SurveyViewModel>
+@{
+    ViewData["Title"] = "SurveyResults";
+}
+
+
+<div class="card">
+    <div class="card-body bg-warning">
+        <p class="card-text">In top-left, there is a an icon with 3 line. You can click that icon and see the surveys
+            that you didn't participate yet.</p>
+    </div>
+    <div class="card-header d-flex justify-content-between">
+        <p class="card-title">Surveys that Answered</p>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <table id="example1" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>UserName</th>
+                    <th>SurveyName</th>
+                    <th>Question</th>
+                    <th>Answer</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Deneme</td>
+                    <td>Deneme</td>
+                    <td>Deneme</td>
+                    <td>Deneme</td>
+                    @* <td class="d-flex justify-content-around">
+                       
+                            <a asp-area="Personel" asp-controller="Student" asp-action="NoteAdd" asp-route-id="@student.Id"
+                                class="btn btn-primary">Add Note</a>
+                        
+                       
+                                <a asp-area="Personel" asp-controller="Student" asp-action="NoteUpdate"
+                                    asp-route-id="@student.Notes[0].Id" class="btn btn-primary">MidtermUpdate</a>
+                            
+                            
+                                <a asp-area="Personel" asp-controller="Student" asp-action="NoteUpdate"
+                                    asp-route-id="@student.Notes[0].Id" class="btn btn-primary">FinalUpdate</a>
+                           
+                            <a asp-area="Personel" asp-controller="Student" asp-action="NoteUpdate"
+                                asp-route-id="@student.Notes.Where(x=>x.Name == "Midterm").SingleOrDefault().Id"
+                                class="btn btn-primary">MidtermUpdate</a>
+                            <a asp-area="Personel" asp-controller="Student" asp-action="NoteUpdate"
+                                asp-route-id="@student.Notes.Where(x=>x.Name == "Final").SingleOrDefault().Id"
+                                class="btn btn-primary">FinalUpdate</a>
+                        
+                    </td> *@
+                </tr>
+                
+                
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section CssCodes {
+
+    <!-- DataTables -->
+    <link rel="stylesheet" href="~/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+                @* <link rel="stylesheet" href="~/dist/css/adminlte.min.css"> *@
+}
+@section Scripts {
+
+    <!-- DataTables  & Plugins -->
+    <script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="~/plugins/jszip/jszip.min.js"></script>
+    <script src="~/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="~/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    @* <script src="~/dist/js/adminlte.min.js"></script> *@
+    }
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        });
+    </script>

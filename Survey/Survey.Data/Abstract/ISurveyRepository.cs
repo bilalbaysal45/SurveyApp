@@ -9,5 +9,6 @@ namespace Survey.Data.Abstract
     public interface ISurveyRepository : IGenericRepository<Entity.Concrete.Survey>
     {
         List<Entity.Concrete.Survey> GetSurveys(string UserId);
+        List<Entity.Concrete.Survey> SurveyResults();
     }
 }

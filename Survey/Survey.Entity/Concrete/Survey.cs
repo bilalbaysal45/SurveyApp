@@ -8,6 +8,7 @@ namespace Survey.Entity.Concrete
 {
     public class Survey : BaseEntity
     {
-        
+        public List<SurveyUser> SurveyUsers { get; set; }
+        public List<Question> Questions { get; set; }
     }
 }

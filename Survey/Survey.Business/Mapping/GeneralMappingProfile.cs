@@ -41,6 +41,7 @@ namespace Survey.Business.Mapping
             CreateMap<Answer, UpdateAnswerDto>().ReverseMap();
 
             CreateMap<SurveyUser, AddSurveyUserDto>().ReverseMap();
+            CreateMap<SurveyUser, SurveyUserDto>().ReverseMap();
         }
     }
 }

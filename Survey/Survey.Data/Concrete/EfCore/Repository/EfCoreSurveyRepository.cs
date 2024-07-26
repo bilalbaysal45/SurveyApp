@@ -28,5 +28,30 @@ namespace Survey.Data.Concrete.EfCore.Repository
                                     .ToList();
             return result;
         }
+        public List<Entity.Concrete.Survey> SurveyResults()
+        {
+            var result = Context.Surveys
+                                .Select(q => new Entity.Concrete.Survey
+                                {
+                                    Id = q.Id,
+                                    Name = q.Name,
+                                    Description = q.Description,
+                                    CreatedDate = q.CreatedDate,
+                                    ModifiedDate = q.ModifiedDate,
+                                    Questions = q.Questions.Select(q=>new Question{
+                                        Id=q.Id,
+                                        Name=q.Name,
+                                        Answers = q.Answers.Select(a=> new Answer{
+                                            Id=a.Id,
+                                            Name=a.Name,
+                                            UserId=a.UserId,
+                                            User=a.User,
+                                            OptionId=a.OptionId,
+                                        }).ToList()
+                                    }).ToList()
+                                })
+                                .ToList();
+            return result ?? new List<Entity.Concrete.Survey>();
+        }
     }
 }

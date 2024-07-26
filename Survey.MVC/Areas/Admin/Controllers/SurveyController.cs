@@ -68,5 +68,11 @@ namespace Survey.MVC.Areas.Admin.Controllers
             }
             return View("Index");
         }
+        public async Task<IActionResult> SurveyResults()
+        {
+            var surveyDAL = new SurveyDAL(RequestUris.SurveyResults);
+            var response = await surveyDAL.SurveyResults(RequestUris.SurveyResults);
+            return View(response);
+        }
     }
 }
