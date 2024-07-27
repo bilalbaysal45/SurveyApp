@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Survey.MVC.Models;
 
 namespace Survey.MVC.Areas.User.Models
 {
@@ -16,6 +17,7 @@ namespace Survey.MVC.Areas.User.Models
         public int OptionId { get; set; }
         public int QuestionId { get; set; }
         public string UserId { get; set; }
+        public OptionViewModel Option { get; set; }
         public IdentityUser User { get; set; }
     }
 }

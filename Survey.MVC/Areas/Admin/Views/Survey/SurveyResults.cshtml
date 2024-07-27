@@ -1,6 +1,7 @@
 @model List<SurveyViewModel>
 @{
     ViewData["Title"] = "SurveyResults";
+    int index = 0 ;
 }
 
 
@@ -17,42 +18,28 @@
         <table id="example1" class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>UserName</th>
                     <th>SurveyName</th>
+                    <th>UserName</th>
                     <th>Question</th>
                     <th>Answer</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Deneme</td>
-                    <td>Deneme</td>
-                    <td>Deneme</td>
-                    <td>Deneme</td>
-                    @* <td class="d-flex justify-content-around">
-                       
-                            <a asp-area="Personel" asp-controller="Student" asp-action="NoteAdd" asp-route-id="@student.Id"
-                                class="btn btn-primary">Add Note</a>
-                        
-                       
-                                <a asp-area="Personel" asp-controller="Student" asp-action="NoteUpdate"
-                                    asp-route-id="@student.Notes[0].Id" class="btn btn-primary">MidtermUpdate</a>
-                            
-                            
-                                <a asp-area="Personel" asp-controller="Student" asp-action="NoteUpdate"
-                                    asp-route-id="@student.Notes[0].Id" class="btn btn-primary">FinalUpdate</a>
-                           
-                            <a asp-area="Personel" asp-controller="Student" asp-action="NoteUpdate"
-                                asp-route-id="@student.Notes.Where(x=>x.Name == "Midterm").SingleOrDefault().Id"
-                                class="btn btn-primary">MidtermUpdate</a>
-                            <a asp-area="Personel" asp-controller="Student" asp-action="NoteUpdate"
-                                asp-route-id="@student.Notes.Where(x=>x.Name == "Final").SingleOrDefault().Id"
-                                class="btn btn-primary">FinalUpdate</a>
-                        
-                    </td> *@
-                </tr>
-                
-                
+                @foreach(var survey in Model)
+                {
+                    foreach(var question in survey.Questions)
+                    {
+                        foreach(var answer in question.Answers)
+                        {
+                            <tr>
+                                <td>@survey.Name</td>
+                                <td>@answer.User.UserName</td>
+                                <td>@question.Name</td>
+                                <td>@answer.Option.Name</td>
+                            </tr>
+                        }
+                    }
+                }
             </tbody>
         </table>
     </div>
@@ -64,10 +51,9 @@
     <link rel="stylesheet" href="~/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="~/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="~/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-                @* <link rel="stylesheet" href="~/dist/css/adminlte.min.css"> *@
+    <link rel="stylesheet" href="~/dist/css/adminlte.min.css">
 }
 @section Scripts {
-
     <!-- DataTables  & Plugins -->
     <script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="~/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -81,13 +67,22 @@
     <script src="~/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="~/plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="~/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-    @* <script src="~/dist/js/adminlte.min.js"></script> *@
+    <script src="~/dist/js/adminlte.min.js"></script>
     }
-    <script>
-        $(function () {
-            $("#example1").DataTable({
-                "responsive": true, "lengthChange": false, "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+<script>
+    $(function () {
+        $("#example1").DataTable({
+            "responsive": true, "lengthChange": false, "autoWidth": false,
+            "buttons": ["excel", "pdf", "colvis"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
         });
-    </script>
+    });
+</script>

@@ -46,6 +46,7 @@ namespace Survey.Data.Concrete.EfCore.Repository
                                             Name=a.Name,
                                             UserId=a.UserId,
                                             User=a.User,
+                                            Option = a.Option,
                                             OptionId=a.OptionId,
                                         }).ToList()
                                     }).ToList()
