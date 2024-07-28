@@ -16,11 +16,13 @@ namespace Survey.MVC.Areas.Admin.Controllers
     {
         private readonly ILogger<RoleController> _logger;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public RoleController(ILogger<RoleController> logger, RoleManager<IdentityRole> roleManager)
+        public RoleController(ILogger<RoleController> logger, RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager)
         {
             _logger = logger;
             _roleManager = roleManager;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -72,6 +74,20 @@ namespace Survey.MVC.Areas.Admin.Controllers
             {
                 return BadRequest("Failed to create role");
             }
+        }
+        public async Task<IActionResult> UsersRole()
+        {
+            var roles = _roleManager.Roles.ToList();
+            var users = new List<UsersWithRoles>();
+            foreach (var role in roles)
+            {
+                var usersWithRole = await _userManager.GetUsersInRoleAsync(role.Name);
+                foreach (var user in usersWithRole)
+                {
+                    users.Add(new UsersWithRoles{User = user,Role = role});
+                }
+            }
+            return View(users);
         }
     }
 }
