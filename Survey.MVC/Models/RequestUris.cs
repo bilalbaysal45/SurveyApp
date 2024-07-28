@@ -12,6 +12,7 @@ namespace Survey.MVC.Models
     {
         public static string GetAllSurveys { get; set; } = "http://localhost:5077/getSurveys";
         public static string GetSurveysByUserId { get; set; } = "http://localhost:5077/getSurveysByUserId";
+        public static string GetSurveysNotAnswered { get; set; } = "http://localhost:5077/getSurveysNotAnswered"; // id DataAccessLayer da ekleniyor
         public static string GetSurveyById { get; set; } = "http://localhost:5077/getSurvey"; // id DataAccessLayer da ekleniyor
         public static string AddSurvey { get; set; } = "http://localhost:5077/addSurvey";
         public static string UpdateSurvey { get; set; } = "http://localhost:5077/updateSurvey";

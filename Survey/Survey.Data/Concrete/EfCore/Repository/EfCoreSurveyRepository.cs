@@ -54,5 +54,20 @@ namespace Survey.Data.Concrete.EfCore.Repository
                                 .ToList();
             return result ?? new List<Entity.Concrete.Survey>();
         }
+        public List<Entity.Concrete.Survey> GetSurveysNotAnswered(string userId)
+        {
+            var result = Context.Surveys.Select(s=> new Entity.Concrete.Survey{
+                                                    Id = s.Id,
+                                                    Name=s.Name,
+                                                    Description=s.Description,
+                                                    ModifiedDate=s.ModifiedDate,
+                                                    SurveyUsers=s.SurveyUsers.Where(su=>su.UserId == userId && su.IsDone == false)
+                                                                             .Select(su=>new SurveyUser{
+                                                                                        SurveyId = su.SurveyId,
+                                                                                        UserId = su.UserId,
+                                                                                        IsDone = su.IsDone}).ToList()})
+                                        .Where(s => s.SurveyUsers.Count > 0).ToList();
+            return result;
+        }
     }
 }

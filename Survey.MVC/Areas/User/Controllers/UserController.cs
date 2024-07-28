@@ -42,8 +42,9 @@ namespace Survey.MVC.Areas.User.Controllers
         }
         public async Task<IActionResult> Surveys()
         {
-            var surveyDAL = new SurveyDAL(RequestUris.GetAllSurveys);
-            var surveys = await surveyDAL.GetAll();
+            var surveyDAL = new SurveyDAL(RequestUris.GetSurveysNotAnswered);
+            var userId = _signInManager.UserManager.GetUserId(User);
+            var surveys = await surveyDAL.GetSurveysNotAnswered(RequestUris.GetSurveysNotAnswered, userId);
             return View(surveys);
         }
         public async Task<IActionResult> Survey(int id)

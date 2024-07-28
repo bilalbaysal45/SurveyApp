@@ -52,5 +52,21 @@ namespace Survey.MVC.Areas.User.Data
             }
             return new List<SurveyViewModel>();
         }
+        public async Task<List<SurveyViewModel>> GetSurveysNotAnswered(string requestUri, string id)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                Root<List<SurveyViewModel>> rootSurveys = new Root<List<SurveyViewModel>>();
+                requestUri = requestUri + $"/{id}";
+                var response = await httpClient.GetAsync(requestUri);
+                if (response.IsSuccessStatusCode)
+                {
+                    var contentResponse = await response.Content.ReadAsStringAsync();
+                    rootSurveys = JsonSerializer.Deserialize<Root<List<SurveyViewModel>>>(contentResponse);
+                    return rootSurveys.Data;
+                }
+            }
+            return new List<SurveyViewModel>();
+        }
     }
 }

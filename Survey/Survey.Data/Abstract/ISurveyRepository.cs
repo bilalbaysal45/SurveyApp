@@ -10,5 +10,6 @@ namespace Survey.Data.Abstract
     {
         List<Entity.Concrete.Survey> GetSurveys(string UserId);
         List<Entity.Concrete.Survey> SurveyResults();
+        List<Entity.Concrete.Survey> GetSurveysNotAnswered(string userId);
     }
 }
