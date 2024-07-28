@@ -26,5 +26,12 @@ namespace Survey.API.Controllers
             var jsonResponse = JsonSerializer.Serialize(response);
             return Ok(jsonResponse);
         }
+        [HttpPut("/updateSurveyUser")]
+        public IActionResult Update(UpdateSurveyUserDto updateSurveyUser)
+        {
+            var response = _surveyUserManager.Update(updateSurveyUser);
+            var jsonResponse = JsonSerializer.Serialize(response);
+            return Ok(jsonResponse);
+        }
     }
 }

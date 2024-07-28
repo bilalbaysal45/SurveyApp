@@ -46,5 +46,24 @@ namespace Survey.Business.Concrete
 
             return new ResponseDto<AddSurveyUserDto> { Data = null, Error = "Not Created" };
         }
+        public ResponseDto<UpdateSurveyUserDto> Update(UpdateSurveyUserDto updateSurveyUser)
+        {
+            var surveyUser = _mapper.Map<SurveyUser>(updateSurveyUser);
+            try
+            {
+                var response = _surveyUserRepository.Update(surveyUser);
+                if (response != null)
+                {
+                    return new ResponseDto<UpdateSurveyUserDto> { Data = _mapper.Map<UpdateSurveyUserDto>(response), Error = null };
+                }
+            }
+            catch (Exception ex)
+            {
+                var innerException = ex.InnerException;
+                return new ResponseDto<UpdateSurveyUserDto> { Data = null, Error = innerException.Message };
+            }
+            return new ResponseDto<UpdateSurveyUserDto> { Data = null, Error = "Update Fail Somehow" };
+        }
+
     }
 }

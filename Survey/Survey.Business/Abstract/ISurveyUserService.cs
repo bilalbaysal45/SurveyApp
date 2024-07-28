@@ -11,6 +11,8 @@ namespace Survey.Business.Abstract
     public interface ISurveyUserService
     {
         ResponseDto<AddSurveyUserDto> Create(AddSurveyUserDto newSurveyUser);
+        ResponseDto<UpdateSurveyUserDto> Update(UpdateSurveyUserDto updateSurveyUser);
+
 
     }
 }

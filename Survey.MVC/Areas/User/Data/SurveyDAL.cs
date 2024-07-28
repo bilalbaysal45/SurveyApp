@@ -18,8 +18,8 @@ namespace Survey.MVC.Areas.User.Data
         /// <summary>
         /// Get Surveys Not Added to a User
         /// </summary>
-        /// <param name="requestUri"></param>
-        /// <param name="surveyUser"></param>
+        /// <param name="requestUri">API Url</param>
+        /// <param name="userId">User ID</param>
         /// <returns></returns>
         public async Task<List<SurveyViewModel>> GetSurveys(string requestUri, string userId)
         {

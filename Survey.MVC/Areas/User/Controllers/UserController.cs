@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using Survey.MVC.Areas.User.Data;
 using Survey.MVC.Areas.User.Models;
 using Survey.MVC.Models;
+using Survey.MVC.Areas.Admin.Models;
 
 namespace Survey.MVC.Areas.User.Controllers
 {
@@ -81,7 +82,8 @@ namespace Survey.MVC.Areas.User.Controllers
         {
             if(ModelState.IsValid && flexRadioDefault.Count == questions.Count)
             {
-                // cevapları buradan gönderecem
+                var response = new Root<AddAnswerViewModel>();
+                // Added Answers Here
                 for(int i = 0; i < questions.Count;i++)
                 {
                     var answer = new AnswerDAL(RequestUris.AddAnswer);
@@ -93,9 +95,22 @@ namespace Survey.MVC.Areas.User.Controllers
                         UserId = _signInManager.UserManager.GetUserId(User),
                         OptionId = flexRadioDefault[i],
                         QuestionId=questions[i]};
-                    var response = answer.Create(addAnswerViewModel);
-
+                    response = await answer.Create(addAnswerViewModel);
+                    
                 }
+                // After added the answers, Updated "IsDone = true" in SurveyUser 
+                var responseSurveyUser = new SurveyUserViewModel();
+                if(response.Data is not null)
+                {
+                    var surveyUserDAL = new SurveyUserDAL(RequestUris.UpdateSurveyUser);
+                    var questionDAL = new QuestionDAL(RequestUris.GetQuestionById);
+                    var question = await questionDAL.GetById(questions[0]);
+                    responseSurveyUser = await surveyUserDAL.Update(new SurveyUserViewModel{
+                                                                    SurveyId = question.SurveyId, 
+                                                                    UserId = _signInManager.UserManager.GetUserId(User),
+                                                                    IsDone = true });
+                }
+                
                 return RedirectToAction("Index", "User", new { area = "User", id = _signInManager.UserManager.GetUserId(User) });
             }
             return View();
